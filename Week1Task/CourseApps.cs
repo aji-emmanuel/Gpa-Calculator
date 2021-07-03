@@ -50,7 +50,7 @@ namespace Week1Task
 
         public string CourseGrade()
         {
-            int score = this.AddCourseScore();
+            int score = AddCourseScore();
             var courseGrade = Grades.F;
             if (score <= 100 && score >= 70)
             {
@@ -84,46 +84,43 @@ namespace Week1Task
 
         public int GradeUnit()
         {
-            string courseGrade = this.CourseGrade();
+            string courseGrade = CourseGrade();
             int gradeUnit;
-            if (courseGrade == "A")
+            switch (courseGrade)
             {
-                gradeUnit = 5;
-            }
-            else if (courseGrade == "B")
-            {
-                gradeUnit = 4;
-            }
-            else if (courseGrade == "C")
-            {
-                gradeUnit = 3;
-            }
-            else if (courseGrade == "D")
-            {
-                gradeUnit = 2;
-            }
-            else if (courseGrade == "E")
-            {
-                gradeUnit = 1;
-            }
-            else
-            {
-                gradeUnit = 0;
+                case "A":
+                    gradeUnit = 5;
+                    break;
+                case "B":
+                    gradeUnit = 4;
+                    break;
+                case "C":
+                    gradeUnit = 3;
+                    break;
+                case "D":
+                    gradeUnit = 2;
+                    break;
+                case "E":
+                    gradeUnit = 1;
+                    break;
+                default:
+                    gradeUnit = 0;
+                    break;
             }
             return gradeUnit;
         }
 
         public int WeigthPoint()
         {
-            int courseUnit = this.AddCourseUnit();
-            int gradeUnit = this.GradeUnit();
+            int courseUnit = AddCourseUnit();
+            int gradeUnit = GradeUnit();
             int weigthPoint = courseUnit * gradeUnit;
             return weigthPoint;
         }
 
         public string Remarks()
         {
-            string courseGrade = this.CourseGrade();
+            string courseGrade = CourseGrade();
             string remark;
             if (courseGrade == "A")
             {
