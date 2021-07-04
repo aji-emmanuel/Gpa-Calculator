@@ -15,8 +15,17 @@ namespace Week1Task
 
         public void Help()
         {
-            Console.WriteLine("     Enter 1 to add new Course Code, Grade Unit and Score." +
-                              "\n     Enter 2 to exit from the app.");
+            Console.WriteLine("\n     Enter 1 to add new Course Code, Grade Unit and Score." +
+                              "\n     Enter 2 to print added courses." +
+                              "\n     Enter 3 to exit from the app.");
+
+            Console.Write("\n>>");       // Write a command line terminal symbol.
+        }
+
+        public void Help1()
+        {
+            Console.WriteLine("\n     Enter 1 to add new Course Code, Grade Unit and Score." +
+                              "\n     Enter 3 to exit from the app.");
 
             Console.Write("\n>>");       // Write a command line terminal symbol.
         }
@@ -85,28 +94,15 @@ namespace Week1Task
         public int GradeUnit()
         {
             string courseGrade = CourseGrade();
-            int gradeUnit;
-            switch (courseGrade)
+            var gradeUnit = courseGrade switch
             {
-                case "A":
-                    gradeUnit = 5;
-                    break;
-                case "B":
-                    gradeUnit = 4;
-                    break;
-                case "C":
-                    gradeUnit = 3;
-                    break;
-                case "D":
-                    gradeUnit = 2;
-                    break;
-                case "E":
-                    gradeUnit = 1;
-                    break;
-                default:
-                    gradeUnit = 0;
-                    break;
-            }
+                "A" => 5,
+                "B" => 4,
+                "C" => 3,
+                "D" => 2,
+                "E" => 1,
+                _ => 0,
+            };
             return gradeUnit;
         }
 
@@ -162,11 +158,11 @@ namespace Week1Task
             int gradeUnit = GradeUnit();
             int weigthPoint = WeigthPoint();
             string remarks = Remarks();
-            
 
             CourseItems newItem = new CourseItems(courseCode, courseUnit,
                          courseGrade, gradeUnit, weigthPoint, remarks);
             items.Add(newItem);
+            Console.Clear();
             Console.WriteLine("Item added successfully.");
         }
 
@@ -189,7 +185,7 @@ namespace Week1Task
                 table.PrintLine();
                 Console.ReadLine();
             }
-            */
+            
 
         public void Print()
         {
@@ -201,7 +197,7 @@ namespace Week1Task
             {
                 var table = new ConsoleTable("Course Code", " Course Unit", "Course Grade", "Grade Unit", "Weigth Pt.", "Remark");
 
-                foreach (CourseItems item in items)
+                foreach (PrintTable item in items)
                 {
                     table.AddRow($"{item.CourseCode}", $"      {item.CourseUnit}       ", $"{item.CourseGrade}", $"{item.GradeUnit}" , $"{item.WeightPoint}", $"{item.Remarks}");          // Print all items in the todo list
                 }
@@ -209,7 +205,59 @@ namespace Week1Task
                 table.Write();
             }
         }
-        
+        */
 
+
+        public void Print()
+        {
+            if (items.Count == 0)
+            {
+                Console.Clear();
+                Console.WriteLine("You have not added any Course");
+            }
+            else
+            {
+                PrintTable.PrintLines();
+                PrintTable.PrintHeadings("Course Code", " Course Unit", "Course Grade", "Grade Unit", "Weigth Pt.", "Remark");
+                PrintTable.PrintLines();
+
+                foreach (var item in items)
+                {
+                    if (item.CourseGrade == "A")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        PrintTable.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
+                        Console.ResetColor();
+                        PrintTable.PrintLines();
+                    }
+                    else if (item.CourseGrade == "B")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        PrintTable.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
+                        Console.ResetColor();
+                        PrintTable.PrintLines();
+                    }
+                    else if (item.CourseGrade == "C")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        PrintTable.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
+                        Console.ResetColor();
+                        PrintTable.PrintLines();
+                    }
+                    else if (item.CourseGrade == "F")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        PrintTable.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
+                        Console.ResetColor();
+                        PrintTable.PrintLines();
+                    }
+                    else
+                    {
+                        PrintTable.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
+                        PrintTable.PrintLines();
+                    }
+                }
+            }
+        }
     }
 }

@@ -17,22 +17,18 @@ namespace Week1Task
 
             
 
-            while (options !="2")
+            while (options !="3")
             {
                 if(options=="1")
                 {
-                   // Console.Clear();
-                   // app.AddCourseCode();
-                   // app.AddCourseUnit();
-                   // app.AddCourseScore();
                     app.Add();
                     app.Print();
                     app.Help();
-
-
-
-
-
+                }
+                else if(options=="2")
+                {
+                    app.Print();
+                    app.Help1();
                 }
                 else
                 {
