@@ -9,13 +9,10 @@ namespace Week1Task
         static void Main(string[] args)
         {
             CourseApps app = new CourseApps();
-
             app.Welcome();
             app.Help();
 
             string options = Console.ReadLine();
-
-            
 
             while (options !="3")
             {
@@ -25,15 +22,18 @@ namespace Week1Task
                     app.Print();
                     app.Help();
                 }
-                else if(options=="2")
+                else if (options == "2")
                 {
+                    Console.Clear();
                     app.Print();
-                    app.Help1();
+                    app.Help();
                 }
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("     Invalid option.\n");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\n   Invalid option.");
+                    Console.ResetColor();
                     app.Help();
                 }
                 options = Console.ReadLine();        // Read new input (options).

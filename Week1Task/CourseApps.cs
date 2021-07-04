@@ -7,30 +7,19 @@ namespace Week1Task
 {
     class CourseApps
     {
-       
+        public string courseGrade { get; set; }
+        public int courseUnit { get; set; }
+        public int courseScore { get; set; }
+        public int gradeUnit { get; set; }
+        public int totalCourseUnit { get; set; }
+        public double totalWeigthPoint { get; set; }
+
+        List<CourseItems> items = new List<CourseItems>();
+
         public void Welcome()
         {
             Console.WriteLine("\n               WELCOME TO YOUR GRADE POINT AVERAGE (GPA) CALCULATOR\n");
         }
-
-        public void Help()
-        {
-            Console.WriteLine("\n     Enter 1 to add new Course Code, Grade Unit and Score." +
-                              "\n     Enter 2 to print added courses." +
-                              "\n     Enter 3 to exit from the app.");
-
-            Console.Write("\n>>");       // Write a command line terminal symbol.
-        }
-
-        public void Help1()
-        {
-            Console.WriteLine("\n     Enter 1 to add new Course Code, Grade Unit and Score." +
-                              "\n     Enter 3 to exit from the app.");
-
-            Console.Write("\n>>");       // Write a command line terminal symbol.
-        }
-
-
 
         public string AddCourseCode()
         {
@@ -42,14 +31,48 @@ namespace Week1Task
         public int AddCourseUnit()
         {
             Console.Write("Input Course Unit: ");
-            int courseUnit = int.Parse(Console.ReadLine());
+            try
+            {
+                courseUnit = int.Parse(Console.ReadLine());
+                while (courseUnit < 1 || courseUnit > 5)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("     Invalid Course unit.  Course Unit should be a number between 1 and 5.");
+                    Console.ResetColor();
+                    AddCourseUnit();
+                }
+            }
+            catch (Exception)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("     Invalid Course unit.  Course Unit should be a number between 1 and 5.");
+                Console.ResetColor();
+                AddCourseUnit();
+            }
             return courseUnit;
         }
 
         public int AddCourseScore()
         {
             Console.Write("Input Course Score: ");
-            int courseScore = int.Parse(Console.ReadLine());
+            try
+            {
+                courseScore = int.Parse(Console.ReadLine());
+                while (courseScore < 0 || courseScore > 100)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("     Invalid Course score.  Course score should be a number between 0 and 100.");
+                    Console.ResetColor();
+                    AddCourseScore();
+                }
+            }
+            catch (Exception)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("     Invalid Course score.  Course score should be a number between 0 and 100.");
+                Console.ResetColor();
+                AddCourseScore();
+            }
             return courseScore;
         }
 
@@ -59,42 +82,38 @@ namespace Week1Task
 
         public string CourseGrade()
         {
-            int score = AddCourseScore();
-            var courseGrade = Grades.F;
+            int score = courseScore;
+            courseGrade = Grades.F.ToString();
             if (score <= 100 && score >= 70)
             {
-                courseGrade = Grades.A;
+                courseGrade = Grades.A.ToString();
             }
-
             else if (score < 69 && score >= 60)
             {
-                courseGrade = Grades.B;
+                courseGrade = Grades.B.ToString();
             }
-
             else if (score < 59 && score >= 50)
             {
-                courseGrade = Grades.C;
+                courseGrade = Grades.C.ToString();
             }
-
             else if (score < 49 && score >= 45)
             {
-                courseGrade = Grades.D;
+                courseGrade = Grades.D.ToString();
             }
-
             else if (score < 44 && score >= 40)
             {
-                courseGrade = Grades.E;
+                courseGrade = Grades.E.ToString();
             }
-
             else
-                courseGrade = Grades.F;
-            return courseGrade.ToString();
+            {
+                courseGrade = Grades.F.ToString();
+            }
+            return courseGrade;
         }
 
         public int GradeUnit()
         {
-            string courseGrade = CourseGrade();
-            var gradeUnit = courseGrade switch
+            gradeUnit = courseGrade switch
             {
                 "A" => 5,
                 "B" => 4,
@@ -105,18 +124,14 @@ namespace Week1Task
             };
             return gradeUnit;
         }
-
         public int WeigthPoint()
         {
-            int courseUnit = AddCourseUnit();
-            int gradeUnit = GradeUnit();
             int weigthPoint = courseUnit * gradeUnit;
             return weigthPoint;
         }
 
         public string Remarks()
         {
-            string courseGrade = CourseGrade();
             string remark;
             if (courseGrade == "A")
             {
@@ -146,14 +161,51 @@ namespace Week1Task
         }
 
 
+        public void TotalCourseUnit()
+        {
+            totalCourseUnit = 0;
+            foreach (var item in items)
+            {
+                totalCourseUnit += item.CourseUnit;
+            }
+            Console.WriteLine($"\n     Total Course Unit registered is {totalCourseUnit}.");
+        }
+
+        public void GradeUnitPassed()
+        {
+            int gradeUnitPassed = totalCourseUnit;
+            foreach (var item in items)
+            {
+                if (item.CourseGrade == "F")
+                {
+                    gradeUnitPassed -= item.CourseUnit;
+                }
+            }
+            Console.WriteLine($"     Total Course Unit passed is {gradeUnitPassed}.");
+        }
+
+        public void TotalweigthPoint()
+        {
+            totalWeigthPoint = 0;
+            foreach (var item in items)
+            {
+                totalWeigthPoint += item.WeightPoint;
+            }
+            Console.WriteLine($"     Total Weight Point is {totalWeigthPoint}.");
+        }
+
+        public void Gpa()
+        {
+            double gpa = totalWeigthPoint / totalCourseUnit;
+            Console.WriteLine($"     Your GPA is = {gpa} to 2 decimal places.");
+        }
 
 
-
-        List<CourseItems> items = new List<CourseItems>();
         public void Add()
         {
             string courseCode = AddCourseCode();
             int courseUnit = AddCourseUnit();
+            courseScore = AddCourseScore();
             string courseGrade = CourseGrade();
             int gradeUnit = GradeUnit();
             int weigthPoint = WeigthPoint();
@@ -165,48 +217,6 @@ namespace Week1Task
             Console.Clear();
             Console.WriteLine("Item added successfully.");
         }
-
-        /*
-        public void Print()
-        {
-            PrintTable table = new PrintTable();
-            if (items.Count == 0)
-            {
-                Console.WriteLine("There is no items in list");
-            }
-            else
-            {
-                Console.Clear();
-                table.PrintLine();
-                table.PrintRow("Course Code", "Course Unit", "Grade", "Grade-Unit", "Weigth Pt.", "Remark");
-                table.PrintLine();
-                table.PrintRow("", "", "", "","","");
-                table.PrintRow("", "", "", "","","");
-                table.PrintLine();
-                Console.ReadLine();
-            }
-            
-
-        public void Print()
-        {
-            if (items.Count == 0)
-            {
-                Console.WriteLine("There is no items in list");
-            }
-            else
-            {
-                var table = new ConsoleTable("Course Code", " Course Unit", "Course Grade", "Grade Unit", "Weigth Pt.", "Remark");
-
-                foreach (PrintTable item in items)
-                {
-                    table.AddRow($"{item.CourseCode}", $"      {item.CourseUnit}       ", $"{item.CourseGrade}", $"{item.GradeUnit}" , $"{item.WeightPoint}", $"{item.Remarks}");          // Print all items in the todo list
-                }
-
-                table.Write();
-            }
-        }
-        */
-
 
         public void Print()
         {
@@ -258,6 +268,18 @@ namespace Week1Task
                     }
                 }
             }
+            TotalCourseUnit();
+            GradeUnitPassed();
+            TotalweigthPoint();
+            Gpa();
+        }
+
+        public void Help()
+        {
+            Console.WriteLine("\nEnter 1 to add Course Code, Grade Unit and Score." +
+                              "\nEnter 2 to print table of added courses." +
+                              "\nEnter 3 to exit from the app.");
+            Console.Write("\n>>");                                              // Write a command line terminal symbol.
         }
     }
 }
