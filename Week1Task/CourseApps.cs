@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using ConsoleTables;
+using System.Text.RegularExpressions;
+
 
 namespace Week1Task
 {
@@ -25,6 +25,18 @@ namespace Week1Task
         {
             Console.Write("Input Course Code: ");
             string courseCode = Console.ReadLine();
+
+            string pattern = "^[A-Z]{3}[0-9]{3}";
+            
+            bool match = Regex.IsMatch(courseCode, pattern);
+
+            if (match == false || courseCode.Length!=6)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("     Invalid Course Code.  Course Code should consist of 3 uppercase alphabets and 3 digits with no space between them.");
+                Console.ResetColor();
+                AddCourseCode();
+            }
             return courseCode;
         }
 
@@ -197,7 +209,7 @@ namespace Week1Task
         public void Gpa()
         {
             double gpa = totalWeigthPoint / totalCourseUnit;
-            Console.WriteLine($"     Your GPA is = {gpa} to 2 decimal places.");
+            Console.WriteLine($"     Your GPA is = {Math.Round(gpa,2)}.");
         }
 
 
