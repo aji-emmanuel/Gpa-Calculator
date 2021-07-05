@@ -235,7 +235,9 @@ namespace Week1Task
             if (items.Count == 0)
             {
                 Console.Clear();
-                Console.WriteLine("You have not added any Course");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\n    You have not added any Course");
+                Console.ResetColor();
             }
             else
             {
@@ -279,11 +281,11 @@ namespace Week1Task
                         PrintTable.PrintLines();
                     }
                 }
+                TotalCourseUnit();
+                GradeUnitPassed();
+                TotalweigthPoint();
+                Gpa();
             }
-            TotalCourseUnit();
-            GradeUnitPassed();
-            TotalweigthPoint();
-            Gpa();
         }
 
         public void Help()
