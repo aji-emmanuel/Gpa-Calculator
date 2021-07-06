@@ -1,63 +1,78 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
 namespace Week1Task
 {
     class PrintTable
     {
-        private const int TableWidth = 80;
-        /*
-        public static void PrintLines()
+        List<CourseItems> list = new List<CourseItems>();
+        readonly GpaCalculator calculator = new GpaCalculator();
+
+        public void Print()
         {
-            Console.WriteLine(new string('-', TableWidth));
-        }
-
-        public static void PrintHeadings(params string[] columns)
-        {
-            int Width = (TableWidth - columns.Length) / columns.Length;
-            const string seed = "|";
-            string row = col.Aggregate(seed, (seperator, colText) => seperator + GetCenterAllignedText(colText, Width) + seed);
-            Console.WriteLine(row);
-
-        }
-
-        private static string GetCenterAllignedText(string colText, int width)
-        {
-            colText = colText.Length > width ? colText.Substring(0, width - 3) + "..." : colText;
-            return string.IsNullOrEmpty(colText) ? new string(' ', width)
-                : colText.PadRight(width - ((width - colText.Length) / 2)).PadLeft(width);
-        }
-
-        */
-
-        public static void PrintLines()
-        {
-            Console.WriteLine(new string('-', TableWidth));
-        }
-
-        public static void PrintHeadings(params string[] columns)
-        {
-            int width = (TableWidth - columns.Length) / columns.Length;
-            string row = "|";
-
-            foreach (string column in columns)
+            if (list.Count == 0)
             {
-                row += AlignCentre(column, width) + "|";
-            }
-            Console.WriteLine(row);
-        }
-
-        static string AlignCentre(string text, int width)
-        {
-            text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
-
-            if (string.IsNullOrEmpty(text))
-            {
-                return new string(' ', width);
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\n    You have not added any Course");
+                Console.ResetColor();
             }
             else
             {
-                return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
+                Table.PrintLines();
+                Table.PrintHeadings("Course Code", " Course Unit", "Course Grade", "Grade Unit", "Weigth Pt.", "Remark");
+                Table.PrintLines();
+
+                foreach (var item in list)
+                {
+                    if (item.CourseGrade == "A")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Table.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
+                        Console.ResetColor();
+                        Table.PrintLines();
+                    }
+                    /*
+                    else if (item.CourseGrade == "B")
+                    {
+                        //Console.ForegroundColor = ConsoleColor.Blue;
+                        Table.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
+                        //Console.ResetColor();
+                        Table.PrintLines();
+                    }
+                    else if (item.CourseGrade == "C")
+                    {
+                       // Console.ForegroundColor = ConsoleColor.Yellow;
+                        Table.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
+                       // Console.ResetColor();
+                        Table.PrintLines();
+                    }
+
+                    */
+                    else if (item.CourseGrade == "F")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Table.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
+                        Console.ResetColor();
+                        Table.PrintLines();
+                    }
+                    else
+                    {
+                        Table.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
+                        Table.PrintLines();
+                    }
+                }
+                calculator.TotalCourseUnit();
+                Table.PrintLines();
+                calculator.GradeUnitPassed();
+                Table.PrintLines();
+                calculator.TotalweigthPoint();
+                Table.PrintLines();
+                calculator.Gpa();
+                Table.PrintLines();
+
             }
         }
-
     }
 }
