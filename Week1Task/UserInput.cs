@@ -1,24 +1,14 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
+
 namespace Week1Task
 {
-    class Input
+    class UserInput
     {
         public int CourseUnit { get; set; }
         public int CourseScore { get; set; }
         public string CourseCode { get; set; }
-
-        /// <summary>
-        /// Calls the methods that prompt the user for inputs.
-        /// </summary>
-
-        public void GetUserInput()
-        {
-            AddCourseCode();
-            AddCourseUnit();
-            AddCourseScore();
-        }
 
         /// <summary>
         /// Prompts user for Course Code and validates it.
@@ -55,7 +45,7 @@ namespace Week1Task
             try
             {
                 CourseUnit = int.Parse(Console.ReadLine());
-                while (CourseUnit < 1 || CourseUnit > 5)
+                while (CourseUnit < 1 || CourseUnit > 9)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("     Invalid Course unit.  Course Unit should be a number between 1 and 5.");
@@ -101,7 +91,5 @@ namespace Week1Task
             }
             return CourseScore;
         }
-
-        
     }
 }

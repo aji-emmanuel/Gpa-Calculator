@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
 namespace Week1Task
 {
     class CourseItems
     {
-     
         public string CourseCode { get; set; }
         public int CourseUnit { get; set; }
         public string CourseGrade { get; set; }
@@ -12,7 +14,7 @@ namespace Week1Task
         public string Remarks { get; set; }
 
         public CourseItems(string courseCode, int courseUnit,
-          string courseGrade, int gradeUnit, int weightPoint, string remark)
+            string courseGrade, int gradeUnit, int weightPoint, string remark)
         {
             CourseCode = courseCode;
             CourseUnit = courseUnit;

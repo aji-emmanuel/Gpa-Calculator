@@ -1,10 +1,10 @@
 ﻿using System;
 namespace Week1Task
 {
-    class Table
+    class TableModel
     {
         private const int TableWidth = 80;
-        
+
         public static void PrintLines()
         {
             Console.WriteLine(new string('-', TableWidth));
