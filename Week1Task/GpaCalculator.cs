@@ -6,13 +6,13 @@ namespace Week1Task
 {
     class GpaCalculator
     {
-        public int gradeUnit { get; set; }
-        public int totalCourseUnit { get; set; }
-        public double totalWeigthPoint { get; set; }
+        //public int gradeUnit { get; set; }
+        public int TotalCourseUnit { get; set; }
+        public double TotalWeigthPoint { get; set; }
+        public int CourseWeigthPoint { get; set; }
 
-
-        readonly EnumAndGrades grade = new EnumAndGrades();
-        List<CourseItems> items = new List<CourseItems>();
+        readonly List<CourseItems> items = new List<CourseItems>();
+        readonly EnumAndGrades unit = new EnumAndGrades();
         readonly Input input = new Input();
 
         /// <summary>
@@ -20,69 +20,29 @@ namespace Week1Task
         /// </summary>
         /// <returns></returns>
 
-        public int GradeUnit()
-        {
-            gradeUnit = grade.courseGrade switch
-            {
-                "A" => 5,
-                "B" => 4,
-                "C" => 3,
-                "D" => 2,
-                "E" => 1,
-                _ => 0,
-            };
-            return gradeUnit;
-        }
+        
         public int WeigthPoint()
         {
-            int weigthPoint = input.courseUnit * gradeUnit;
-            return weigthPoint;
+            CourseWeigthPoint = input.CourseUnit * unit.CourseGradeUnit;
+            return CourseWeigthPoint;
         }
 
-        public string Remarks()
-        {
-            string remark;
-            if (grade.courseGrade == "A")
-            {
-                remark = "Excellent";
-            }
-            else if (grade.courseGrade == "B")
-            {
-                remark = "Very Good";
-            }
-            else if (grade.courseGrade == "C")
-            {
-                remark = "Good";
-            }
-            else if (grade.courseGrade == "D")
-            {
-                remark = "Fair";
-            }
-            else if (grade.courseGrade == "E")
-            {
-                remark = "Pass";
-            }
-            else
-            {
-                remark = "Fail";
-            }
-            return remark;
-        }
+       
 
 
-        public void TotalCourseUnit()
+        public void ComputeTotalCourseUnit()
         {
-            totalCourseUnit = 0;
+            TotalCourseUnit = 0;
             foreach (var item in items)
             {
-                totalCourseUnit += item.CourseUnit;
+                TotalCourseUnit += item.CourseUnit;
             }
-            Console.WriteLine($"\n\n     Total Course Unit registered is {totalCourseUnit}.");
+            Console.WriteLine($"\n\n     Total Course Unit registered is {TotalCourseUnit}.");
         }
 
         public void GradeUnitPassed()
         {
-            int gradeUnitPassed = totalCourseUnit;
+            int gradeUnitPassed = TotalCourseUnit;
             foreach (var item in items)
             {
                 if (item.CourseGrade == "F")
@@ -95,20 +55,20 @@ namespace Week1Task
 
         public void TotalweigthPoint()
         {
-            totalWeigthPoint = 0;
+            TotalWeigthPoint = 0;
             foreach (var item in items)
             {
-                totalWeigthPoint += item.WeightPoint;
+                TotalWeigthPoint += item.WeightPoint;
             }
-            Console.WriteLine($"     Total Weight Point is {totalWeigthPoint}.");
+            Console.WriteLine($"     Total Weight Point is {TotalWeigthPoint}.");
         }
 
         public void Gpa()
         {
-            double gpa = totalWeigthPoint / totalCourseUnit;
+            double gpa = TotalWeigthPoint / TotalCourseUnit;
             string gpaDecimal = String.Format(" {0:0.00}", gpa);
             Console.WriteLine("     Your GPA is " + gpaDecimal);
         }
-
+       
     }
 }

@@ -6,8 +6,9 @@ namespace Week1Task
 {
     class PrintTable
     {
-        List<CourseItems> list = new List<CourseItems>();
+        readonly List<CourseItems> list = new List<CourseItems>();
         readonly GpaCalculator calculator = new GpaCalculator();
+        
 
         public void Print()
         {
@@ -33,23 +34,7 @@ namespace Week1Task
                         Console.ResetColor();
                         Table.PrintLines();
                     }
-                    /*
-                    else if (item.CourseGrade == "B")
-                    {
-                        //Console.ForegroundColor = ConsoleColor.Blue;
-                        Table.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
-                        //Console.ResetColor();
-                        Table.PrintLines();
-                    }
-                    else if (item.CourseGrade == "C")
-                    {
-                       // Console.ForegroundColor = ConsoleColor.Yellow;
-                        Table.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
-                       // Console.ResetColor();
-                        Table.PrintLines();
-                    }
-
-                    */
+                  
                     else if (item.CourseGrade == "F")
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -63,7 +48,7 @@ namespace Week1Task
                         Table.PrintLines();
                     }
                 }
-                calculator.TotalCourseUnit();
+                calculator.ComputeTotalCourseUnit();
                 Table.PrintLines();
                 calculator.GradeUnitPassed();
                 Table.PrintLines();

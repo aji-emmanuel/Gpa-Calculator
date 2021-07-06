@@ -7,10 +7,7 @@ namespace Week1Task
 {
     class CourseApps
     {
-        
-        
-
-        List<CourseItems> items = new List<CourseItems>();
+        readonly List<CourseItems> items = new List<CourseItems>();
         readonly GpaCalculator calculator = new GpaCalculator();
         readonly EnumAndGrades grade = new EnumAndGrades();
         readonly PrintTable print = new PrintTable();
@@ -70,32 +67,29 @@ namespace Week1Task
 
         public void Add()
         {
+            input.GetUserInput();
 
-/*
-            string courseCode = input.AddCourseCode();
-            int courseUnit = input.AddCourseUnit();
-            input.courseScore = input.AddCourseScore();
-            string courseGrade = grade.CourseGrade();
-            int gradeUnit = calculator.GradeUnit();
-            int weigthPoint = calculator.WeigthPoint();
-            string remark = calculator.Remarks();
-*/
-            CourseItems courseItems = new CourseItems();
+           
+           
+            //string remark = calculator.Remarks();
+
+           /* CourseItems courseItems = new CourseItems();
             courseItems.CourseCode = input.AddCourseCode();
             courseItems.CourseUnit = input.AddCourseUnit();
 
-            input.courseScore = input.AddCourseScore();
+            input.CourseScore = input.AddCourseScore();
 
             courseItems.CourseGrade = grade.CourseGrade();
             courseItems.GradeUnit = calculator.GradeUnit();
             courseItems.WeightPoint = calculator.WeigthPoint();
             courseItems.Remarks = calculator.Remarks();
+           */
 
-            /* CourseItems newItem = new CourseItems(courseCode, courseUnit,
-                          courseGrade, gradeUnit, weigthPoint, remark);*/
+            CourseItems newItem = new CourseItems(input.CourseCode, input.CourseUnit,
+                          grade.CourseGrade, grade.CourseGradeUnit, calculator.CourseWeigthPoint, grade.Remark);
 
 
-            items.Add(courseItems);
+            items.Add(newItem);
             Console.Clear();
             Console.WriteLine("Item added successfully.");
         }

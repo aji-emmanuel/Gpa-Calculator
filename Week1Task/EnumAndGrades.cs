@@ -10,7 +10,9 @@ namespace Week1Task
         { A, B, C, D, E, F }
 
 
-        public string courseGrade { get; set; }
+        public string CourseGrade { get; set; }
+        public int CourseGradeUnit { get; set; }
+        public string Remark { get; set; }
         readonly Input input = new Input();
 
         /// <summary>
@@ -18,35 +20,89 @@ namespace Week1Task
         /// </summary>
         /// <returns></returns>
 
-        public string CourseGrade()
+        public string Grade()
         {
-            int score = input.courseScore;
-            courseGrade = Grades.F.ToString();
+            int score = input.CourseScore;
+            CourseGrade = Grades.F.ToString();
             if (score <= 100 && score >= 70)
             {
-                courseGrade = Grades.A.ToString();
+                CourseGrade = Grades.A.ToString();
             }
             else if (score < 69 && score >= 60)
             {
-                courseGrade = Grades.B.ToString();
+                CourseGrade = Grades.B.ToString();
             }
             else if (score < 59 && score >= 50)
             {
-                courseGrade = Grades.C.ToString();
+                CourseGrade = Grades.C.ToString();
             }
             else if (score < 49 && score >= 45)
             {
-                courseGrade = Grades.D.ToString();
+                CourseGrade = Grades.D.ToString();
             }
             else if (score < 44 && score >= 40)
             {
-                courseGrade = Grades.E.ToString();
+                CourseGrade = Grades.E.ToString();
             }
             else
             {
-                courseGrade = Grades.F.ToString();
+                CourseGrade = Grades.F.ToString();
             }
-            return courseGrade;
+            return CourseGrade;
+        }
+
+        /// <summary>
+        /// Computes Course GradeUnit using the Course Grade.
+        /// </summary>
+        /// <returns></returns>
+
+        public int GradeUnit()
+        {
+            CourseGradeUnit = CourseGrade switch
+            {
+                "A" => 5,
+                "B" => 4,
+                "C" => 3,
+                "D" => 2,
+                "E" => 1,
+                _ => 0,
+            };
+            return CourseGradeUnit;
+        }
+
+        /// <summary>
+        /// Determines the remark for a Course based on the Course Grade.
+        /// </summary>
+        /// <returns></returns>
+
+        public string Remarks()
+        {
+            
+            if (CourseGrade == "A")
+            {
+                Remark = "Excellent";
+            }
+            else if (CourseGrade == "B")
+            {
+                Remark = "Very Good";
+            }
+            else if (CourseGrade == "C")
+            {
+                Remark = "Good";
+            }
+            else if (CourseGrade == "D")
+            {
+                Remark = "Fair";
+            }
+            else if (CourseGrade == "E")
+            {
+                Remark = "Pass";
+            }
+            else
+            {
+                Remark = "Fail";
+            }
+            return Remark;
         }
     }
 }

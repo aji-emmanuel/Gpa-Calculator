@@ -5,8 +5,20 @@ namespace Week1Task
 {
     class Input
     {
-        public int courseUnit { get; set; }
-        public int courseScore { get; set; }
+        public int CourseUnit { get; set; }
+        public int CourseScore { get; set; }
+        public string CourseCode { get; set; }
+
+        /// <summary>
+        /// Calls the methods that prompt the user for inputs.
+        /// </summary>
+
+        public void GetUserInput()
+        {
+            AddCourseCode();
+            AddCourseUnit();
+            AddCourseScore();
+        }
 
         /// <summary>
         /// Prompts user for Course Code and validates it.
@@ -16,20 +28,20 @@ namespace Week1Task
         public string AddCourseCode()
         {
             Console.Write("Input Course Code: ");
-            string courseCode = Console.ReadLine();
+            CourseCode = Console.ReadLine();
 
             string pattern = "^[A-Z]{3}[0-9]{3}";
 
-            bool match = Regex.IsMatch(courseCode, pattern);
+            bool match = Regex.IsMatch(CourseCode, pattern);
 
-            if (match == false || courseCode.Length != 6)
+            if (match == false || CourseCode.Length != 6)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("     Invalid Course Code.  Course Code should consist of 3 uppercase alphabets and 3 digits with no space between them.");
                 Console.ResetColor();
                 AddCourseCode();
             }
-            return courseCode;
+            return CourseCode;
         }
 
         /// <summary>
@@ -42,8 +54,8 @@ namespace Week1Task
             Console.Write("Input Course Unit: ");
             try
             {
-                courseUnit = int.Parse(Console.ReadLine());
-                while (courseUnit < 1 || courseUnit > 5)
+                CourseUnit = int.Parse(Console.ReadLine());
+                while (CourseUnit < 1 || CourseUnit > 5)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("     Invalid Course unit.  Course Unit should be a number between 1 and 5.");
@@ -58,11 +70,11 @@ namespace Week1Task
                 Console.ResetColor();
                 AddCourseUnit();
             }
-            return courseUnit;
+            return CourseUnit;
         }
 
         /// <summary>
-        /// Prompts user for course Score and validates it.
+        /// Prompts user for Course Score and validates it.
         /// </summary>
         /// <returns></returns>
 
@@ -71,8 +83,8 @@ namespace Week1Task
             Console.Write("Input Course Score: ");
             try
             {
-                courseScore = int.Parse(Console.ReadLine());
-                while (courseScore < 0 || courseScore > 100)
+                CourseScore = int.Parse(Console.ReadLine());
+                while (CourseScore < 0 || CourseScore > 100)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("     Invalid Course score.  Course score should be a number between 0 and 100.");
@@ -87,7 +99,9 @@ namespace Week1Task
                 Console.ResetColor();
                 AddCourseScore();
             }
-            return courseScore;
+            return CourseScore;
         }
+
+        
     }
 }

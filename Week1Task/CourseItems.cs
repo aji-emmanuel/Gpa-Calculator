@@ -10,7 +10,7 @@ namespace Week1Task
         public int GradeUnit { get; set; }
         public int WeightPoint { get; set; }
         public string Remarks { get; set; }
-/*
+
         public CourseItems(string courseCode, int courseUnit,
           string courseGrade, int gradeUnit, int weightPoint, string remark)
         {
@@ -20,7 +20,7 @@ namespace Week1Task
             GradeUnit = gradeUnit;
             WeightPoint = weightPoint;
             Remarks = remark;
-        }*/
+        }
 
     }
 }
