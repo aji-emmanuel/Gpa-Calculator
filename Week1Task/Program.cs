@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace Week1Task
 {
     class Program

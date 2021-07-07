@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace Week1Task
 {
     class CourseItems
@@ -23,6 +20,5 @@ namespace Week1Task
             WeightPoint = weightPoint;
             Remarks = remark;
         }
-
     }
 }

@@ -68,7 +68,34 @@ namespace Week1Task
             }
         }
 
+        /// <summary>
+        /// Adds the Course Details to CourseItems List.
+        /// </summary>
         
+        public void Add()
+        {
+            input.CourseCode = input.AddCourseCode();
+            int courseUnit = input.AddCourseUnit();
+            input.CourseScore = input.AddCourseScore();
+            string courseGrade = ComputeGrade();
+            int gradeUnit = ComputeScoreGradeUnit();
+            int weigthPoint = ComputeWeigthPoint();
+            string remarks = Remarks();
+
+            CourseItems newItem = new CourseItems(input.CourseCode, courseUnit,
+                         courseGrade, gradeUnit, weigthPoint, remarks);
+            if(items.Contains(newItem)==true)
+            {
+                Console.WriteLine("You have a Course with same Course Name!");
+            }
+            else
+            {
+                items.Add(newItem);
+                Console.Clear();
+                Console.WriteLine("Item added successfully.");
+            }
+        }
+
         /// <summary>
         /// This calculates the Course Grade based on the Course Score.
         /// </summary>
@@ -136,41 +163,6 @@ namespace Week1Task
         }
 
         /// <summary>
-        /// Attaches a remark to each Course Grade.
-        /// </summary>
-        /// <returns></returns>
-
-        public string Remarks()
-        {
-            string remark;
-            if (CourseGrade == "A")
-            {
-                remark = "Excellent";
-            }
-            else if (CourseGrade == "B")
-            {
-                remark = "Very Good";
-            }
-            else if (CourseGrade == "C")
-            {
-                remark = "Good";
-            }
-            else if (CourseGrade == "D")
-            {
-                remark = "Fair";
-            }
-            else if (CourseGrade == "E")
-            {
-                remark = "Pass";
-            }
-            else
-            {
-                remark = "Fail";
-            }
-            return remark;
-        }
-
-        /// <summary>
         /// Calculates the Total Unit entered by the User.
         /// </summary>
 
@@ -224,7 +216,7 @@ namespace Week1Task
             double gpa = TotalWeigthPoint / TotalCourseUnit;
             string gpaDecimal = String.Format(" {0:0.00}", gpa);
             Console.Write("     Your GPA is ");
-            if (double.Parse(gpaDecimal) > 3)
+            if (double.Parse(gpaDecimal) >= 3)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write(gpaDecimal + "\n");
@@ -238,22 +230,39 @@ namespace Week1Task
             }
         }
 
+        /// <summary>
+        /// Attaches a remark to each Course Grade.
+        /// </summary>
+        /// <returns></returns>
 
-        public void Add()
+        public string Remarks()
         {
-            input.CourseCode = input.AddCourseCode();
-            int courseUnit = input.AddCourseUnit();
-            input.CourseScore = input.AddCourseScore();
-            string courseGrade = ComputeGrade();
-            int gradeUnit = ComputeScoreGradeUnit();
-            int weigthPoint = ComputeWeigthPoint();
-            string remarks = Remarks();
-
-            CourseItems newItem = new CourseItems(input.CourseCode, courseUnit,
-                         courseGrade, gradeUnit, weigthPoint, remarks);
-            items.Add(newItem);
-            Console.Clear();
-            Console.WriteLine("Item added successfully.");
+            string remark;
+            if (CourseGrade == "A")
+            {
+                remark = "Excellent";
+            }
+            else if (CourseGrade == "B")
+            {
+                remark = "Very Good";
+            }
+            else if (CourseGrade == "C")
+            {
+                remark = "Good";
+            }
+            else if (CourseGrade == "D")
+            {
+                remark = "Fair";
+            }
+            else if (CourseGrade == "E")
+            {
+                remark = "Pass";
+            }
+            else
+            {
+                remark = "Fail";
+            }
+            return remark;
         }
 
         /// <summary>
@@ -305,7 +314,5 @@ namespace Week1Task
             ComputeGpa();                       // Prints out the calculated GPA.
             TableModel.PrintLines();
         }
-
-       
     }
 }

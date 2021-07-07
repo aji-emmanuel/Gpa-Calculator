@@ -35,6 +35,5 @@ namespace Week1Task
                 return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
             }
         }
-
     }
 }

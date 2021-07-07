@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-
 namespace Week1Task
 {
     class UserInput
@@ -20,11 +19,10 @@ namespace Week1Task
             Console.Write("Input Course Code: ");
             CourseCode = Console.ReadLine();
 
-            string pattern = "^[A-Z]{3}[0-9]{3}";
-
+            string pattern = "^[A-Z]{3}[0-9]{3}$";
             bool match = Regex.IsMatch(CourseCode, pattern);
 
-            if (match == false || CourseCode.Length != 6)
+            if (match == false )
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("     Invalid Course Code.  Course Code should consist of 3 uppercase alphabets and 3 digits with no space between them.");
@@ -48,7 +46,7 @@ namespace Week1Task
                 while (CourseUnit < 1 || CourseUnit > 9)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("     Invalid Course unit.  Course Unit should be a number between 1 and 5.");
+                    Console.WriteLine("     Invalid Course unit.  Course Unit should be a number between 1 and 9.");
                     Console.ResetColor();
                     AddCourseUnit();
                 }
