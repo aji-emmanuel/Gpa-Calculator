@@ -16,7 +16,7 @@ namespace Week1Task
 
         public string AddCourseCode()
         {
-            Console.Write("Input Course Code: ");
+            Console.Write("     Input Course Code: ");
             CourseCode = Console.ReadLine();
 
             string pattern = "^[A-Z]{3}[0-9]{3}$";
@@ -39,7 +39,7 @@ namespace Week1Task
 
         public int AddCourseUnit()
         {
-            Console.Write("Input Course Unit: ");
+            Console.Write("     Input Course Unit: ");
             try
             {
                 CourseUnit = int.Parse(Console.ReadLine());
@@ -54,7 +54,7 @@ namespace Week1Task
             catch (Exception)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("     Invalid Course unit.  Course Unit should be a number between 1 and 5.");
+                Console.WriteLine("     Invalid Course unit.  Course Unit should be a number between 1 and 9.");
                 Console.ResetColor();
                 AddCourseUnit();
             }
@@ -68,7 +68,7 @@ namespace Week1Task
 
         public int AddCourseScore()
         {
-            Console.Write("Input Course Score: ");
+            Console.Write("     Input Course Score: ");
             try
             {
                 CourseScore = int.Parse(Console.ReadLine());

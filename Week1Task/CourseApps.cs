@@ -19,7 +19,9 @@ namespace Week1Task
 
         public void Welcome()
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\n               WELCOME TO YOUR GRADE POINT AVERAGE (GPA) CALCULATOR\n");
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -28,10 +30,10 @@ namespace Week1Task
 
         public void Help()
         {
-            Console.WriteLine("\nEnter 1 to add Course Code, Grade Unit and Score." +
-                              "\nEnter 2 to print table of added courses." +
-                              "\nEnter 3 to exit from the app.");
-            Console.Write("\n>>");                                              // Write a command line terminal symbol.
+            Console.WriteLine("\n     Enter 1 to add Course Code, Grade Unit and Score." +
+                              "\n     Enter 2 to print table of added courses." +
+                              "\n     Enter 3 to exit from the app.");
+            Console.Write("\n     >>");                                              // Write a command line terminal symbol.
         }
 
         /// <summary>
@@ -60,7 +62,7 @@ namespace Week1Task
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\n   Invalid option.");
+                    Console.WriteLine("\n          Invalid option.");
                     Console.ResetColor();
                     Help();
                 }
@@ -86,13 +88,17 @@ namespace Week1Task
                          courseGrade, gradeUnit, weigthPoint, remarks);
             if(items.Contains(newItem)==true)
             {
-                Console.WriteLine("You have a Course with same Course Name!");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("          You have a Course with same Course Name!");
+                Console.ResetColor();
             }
             else
             {
                 items.Add(newItem);
                 Console.Clear();
-                Console.WriteLine("Item added successfully.");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\n          Item added successfully.");
+                Console.ResetColor();
             }
         }
 
@@ -173,7 +179,7 @@ namespace Week1Task
             {
                 TotalCourseUnit += item.CourseUnit;
             }
-            Console.WriteLine($"\n\n     Total Course Unit registered is {TotalCourseUnit}.");
+            Console.WriteLine($"\n\n          Total Course Unit registered is {TotalCourseUnit}.");
         }
 
         /// <summary>
@@ -190,7 +196,7 @@ namespace Week1Task
                     gradeUnitPassed -= item.CourseUnit;
                 }
             }
-            Console.WriteLine($"     Total Course Unit passed is {gradeUnitPassed}.");
+            Console.WriteLine($"          Total Course Unit passed is {gradeUnitPassed}.");
         }
 
         /// <summary>
@@ -204,7 +210,7 @@ namespace Week1Task
             {
                 TotalWeigthPoint += item.WeightPoint;
             }
-            Console.WriteLine($"     Total Weight Point is {TotalWeigthPoint}.");
+            Console.WriteLine($"          Total Weight Point is {TotalWeigthPoint}.");
         }
 
         /// <summary>
@@ -215,7 +221,7 @@ namespace Week1Task
         {
             double gpa = TotalWeigthPoint / TotalCourseUnit;
             string gpaDecimal = String.Format(" {0:0.00}", gpa);
-            Console.Write("     Your GPA is ");
+            Console.Write("          Your GPA is ");
             if (double.Parse(gpaDecimal) >= 3)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -272,7 +278,7 @@ namespace Week1Task
         public void Print()
         {
             TableModel.PrintLines();
-            TableModel.PrintHeadings("Course Code", " Course Unit", "Course Grade", "Grade Unit", "Weigth Pt.", "Remark");
+            TableModel.PrintHeadings(" Course Code", " Course Unit", "Course Grade", "Grade Unit", "Weigth Pt.", "Remark");
             TableModel.PrintLines();
 
             foreach (var item in items)
@@ -280,20 +286,20 @@ namespace Week1Task
                 if (item.CourseGrade == "A")
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    TableModel.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
+                    TableModel.PrintHeadings("     "+item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
                     Console.ResetColor();
                     TableModel.PrintLines();
                 }
                 else if (item.CourseGrade == "F")
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    TableModel.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
+                    TableModel.PrintHeadings("     "+item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
                     Console.ResetColor();
                     TableModel.PrintLines();
                 }
                 else
                 {
-                    TableModel.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
+                    TableModel.PrintHeadings("     "+item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
                     TableModel.PrintLines();
                 }
             }
