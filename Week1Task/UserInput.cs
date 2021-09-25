@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Week1Task
 {
-    class UserInput
+    public class UserInput
     {
         public int CourseUnit { get; set; }
         public int CourseScore { get; set; }

@@ -271,40 +271,33 @@ namespace Week1Task
 
         public void Print()
         {
-            if (items.Count == 0)
-            {
-                Console.Clear();
-                Console.WriteLine("You have not added any Course");
-            }
-            else
-            {
-                TableModel.PrintLines();
-                TableModel.PrintHeadings("Course Code", " Course Unit", "Course Grade", "Grade Unit", "Weigth Pt.", "Remark");
-                TableModel.PrintLines();
+            TableModel.PrintLines();
+            TableModel.PrintHeadings("Course Code", " Course Unit", "Course Grade", "Grade Unit", "Weigth Pt.", "Remark");
+            TableModel.PrintLines();
 
-                foreach (var item in items)
+            foreach (var item in items)
+            {
+                if (item.CourseGrade == "A")
                 {
-                    if (item.CourseGrade == "A")
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        TableModel.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
-                        Console.ResetColor();
-                        TableModel.PrintLines();
-                    }
-                    else if (item.CourseGrade == "F")
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        TableModel.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
-                        Console.ResetColor();
-                        TableModel.PrintLines();
-                    }
-                    else
-                    {
-                        TableModel.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
-                        TableModel.PrintLines();
-                    }
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    TableModel.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
+                    Console.ResetColor();
+                    TableModel.PrintLines();
+                }
+                else if (item.CourseGrade == "F")
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    TableModel.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
+                    Console.ResetColor();
+                    TableModel.PrintLines();
+                }
+                else
+                {
+                    TableModel.PrintHeadings(item.CourseCode, item.CourseUnit.ToString(), item.CourseGrade, item.GradeUnit.ToString(), item.WeightPoint.ToString(), item.Remarks);
+                    TableModel.PrintLines();
                 }
             }
+            
             ComputeTotalUnit();                 // Prints out Total unit registered.
             TableModel.PrintLines();
             ComputeGradeUnitPassed();           // Prints out Total Grade Unit passed.
